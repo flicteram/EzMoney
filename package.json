@@ -1,0 +1,48 @@
+{
+  "name": "ez-money",
+  "version": "0.1.0",
+  "description": "Roblox game (roblox-ts + React + TopbarPlus + Rojo)",
+  "private": true,
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "serve": "rojo serve",
+    "dev": "concurrently -k -n TS,ROJO -c cyan,magenta \"rbxtsc -w\" \"rojo serve\"",
+    "place": "node -e \"require('fs').mkdirSync('build',{recursive:true})\" && rojo build default.project.json -o build/ez-money.rbxl",
+    "build:rbxl": "rbxtsc && npm run place",
+    "fmt": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "sourcemap": "rojo sourcemap default.project.json -o sourcemap.json --watch",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "check": "tsc --noEmit && eslint src && prettier --check \"src/**/*.{ts,tsx}\""
+  },
+  "devDependencies": {
+    "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/mockdatastoreservice": "^1.0.2",
+    "@rbxts/types": "^1.0.947",
+    "concurrently": "^10.0.5",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-roblox-ts": "^1.4.1",
+    "prettier": "^3.9.6",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.69.0"
+  },
+  "dependencies": {
+    "@rbxts/lapis": "^0.3.8",
+    "@rbxts/pretty-react-hooks": "^0.6.4",
+    "@rbxts/react": "^17.3.7-ts.2",
+    "@rbxts/react-reflex": "^0.3.7",
+    "@rbxts/react-roblox": "^17.3.7-ts.2",
+    "@rbxts/reflex": "^4.3.1",
+    "@rbxts/ripple": "^0.9.3",
+    "@rbxts/services": "^1.6.0",
+    "@rbxts/t": "^3.2.1",
+    "@rbxts/topbar-plus": "^3.2.5"
+  },
+  "allowScripts": {
+    "@rbxts/mockdatastoreservice": false,
+    "fsevents": false
+  }
+}

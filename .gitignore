@@ -1,0 +1,22 @@
+# roblox-ts build output
+/out/
+/include/
+/build/
+*.tsbuildinfo
+
+# deps
+/node_modules/
+
+# rojo / studio
+*.rbxl
+*.rbxlx
+*.rbxl.lock
+*.rbxlx.lock
+*.rbxm
+*.rbxmx
+sourcemap.json
+
+# env / editors
+.env
+.env.*
+.DS_Store

@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "dev: watch + serve",
+			"detail": "rbxtsc --watch alongside rojo serve",
+			"type": "npm",
+			"script": "dev",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": { "kind": "build", "isDefault": true },
+			"presentation": { "panel": "dedicated", "clear": true }
+		},
+		{
+			"label": "check: typecheck + lint",
+			"type": "shell",
+			"command": "npx tsc --noEmit && npx eslint src",
+			"problemMatcher": ["$tsc"],
+			"group": "test"
+		},
+		{
+			"label": "sourcemap: watch",
+			"detail": "Keeps sourcemap.json fresh for luau-lsp",
+			"type": "npm",
+			"script": "sourcemap",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

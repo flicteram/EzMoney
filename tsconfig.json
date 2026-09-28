@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "moduleDetection": "force",
+    "noLib": true,
+    // @rbxts/types 1.0.947 is ahead of compiler-types 3.0.0-types.0 (RBXObject / CollectionHandle);
+    // rbxtsc ignores node_modules diagnostics, the editor does not. Remove when compiler-types catches up.
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "target": "ESNext",
+    "typeRoots": ["node_modules/@rbxts"],
+
+    "rootDir": "src",
+    "outDir": "out",
+    "baseUrl": "src",
+    "paths": {
+      "shared/*": ["shared/*"],
+      "client/*": ["client/*"],
+      "server/*": ["server/*"]
+    },
+    "incremental": true,
+    "tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
+    "declaration": false
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  ROJO_VERSION: 7.7.0
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Rojo ${{ env.ROJO_VERSION }}
+        run: |
+          curl -sSfL "https://github.com/rojo-rbx/rojo/releases/download/v${ROJO_VERSION}/rojo-${ROJO_VERSION}-linux-x86_64.zip" -o rojo.zip
+          mkdir -p "$HOME/.local/bin"
+          unzip -q -o rojo.zip -d "$HOME/.local/bin"
+          chmod +x "$HOME/.local/bin/rojo"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npx eslint src
+
+      - name: Format check
+        run: npx prettier --check "src/**/*.{ts,tsx}"
+
+      - name: Compile to Luau
+        run: npx rbxtsc --verbose
+
+      # `npm run place` creates build/ first - it is gitignored, so a fresh
+      # checkout has no such directory and rojo will not create one.
+      - name: Build place file
+        run: npm run place
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: place-file
+          path: build/ez-money.rbxl
+          if-no-files-found: error
